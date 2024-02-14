@@ -51,7 +51,7 @@ class MqttConfig(TrackedSettings):
     base_topic: str
 
     @classmethod
-    def hassio_default(cls) -> dict[str, Any]:
+    def hassio_default(cls) -> Union[dict[str, Any], None]:
         cfg = eva_ics.hassio_config()
         if cfg is None:
             return None
@@ -186,11 +186,7 @@ def module_main():
     import os
     global CONFIG
     global TEMPLATES_ROOTS
-    try:
-        CONFIG = MySettings.load(os.path.join(os.environ.get('PYEVA_CONFIG', ''), 'modbus2mqtt.yml'))
-    except Exception as e:
-        logging.error(f'Failed to load config: {e}')
-        return
+    CONFIG = MySettings.load(os.path.join(os.environ.get('PYEVA_CONFIG', ''), 'modbus2mqtt.yml'))
     if hassio_config() is not None:
         logging.info('Home assistant detected')
         f = "/homeassistant/addons/eva_ics/modbus2mqtt/templates"
