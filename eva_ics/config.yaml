@@ -1,0 +1,11 @@
+name: "EVA-ICS"
+description: "Eva ICS addon for Home Assistant"
+version: "1.0.10"
+slug: "eva_ics"
+init: false
+arch:
+  - amd64
+services:
+  - "mqtt:need"
+map:
+  - homeassistant_config:rw

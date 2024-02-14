@@ -1,0 +1,5 @@
+pydantic-settings
+jinja2
+pyaml
+pydantic
+requests

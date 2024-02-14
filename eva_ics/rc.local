@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+rm -f /opt/eva4/runtime/.container_setup_completed
+cd /opt/hassio/bin || exit 2
+python3 /opt/hassio/bin/modbus2mqtt.py
