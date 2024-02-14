@@ -1,0 +1,6 @@
+- topic: {{item.mqtt.base_topic}}/{{id}}
+  interval: 5
+  packer: json
+  map:
+    - path: $.device.data.temp.deviceValue
+      oid: sensor:{{id}}/temp
