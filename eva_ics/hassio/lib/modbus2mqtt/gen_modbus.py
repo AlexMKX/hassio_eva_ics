@@ -51,7 +51,7 @@ class MqttConfig(TrackedSettings):
     base_topic: str
 
     @classmethod
-    def hassio_default(cls) -> Union[dict[str, Any], None]:
+    def hassio_default(cls) -> dict[str, Any]:
         cfg = eva_ics.hassio_config()
         if cfg is None:
             return None
