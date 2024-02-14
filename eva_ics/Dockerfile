@@ -9,7 +9,7 @@ RUN mkdir -p /mnt/init
 COPY hassio /opt/hassio
 RUN pip3 install -r /opt/hassio/requirements.txt
 
-RUN chmod a+x /opt/hassio/gen_modbus.py
+RUN chmod a+x /opt/hassio/bin/*
 COPY rc.local /mnt/init/rc.local
 RUN chmod a+x /mnt/init/rc.local
 
