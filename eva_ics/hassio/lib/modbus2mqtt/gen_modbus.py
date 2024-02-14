@@ -186,7 +186,11 @@ def module_main():
     import os
     global CONFIG
     global TEMPLATES_ROOTS
-    CONFIG = MySettings.load(os.path.join(os.environ.get('PYEVA_CONFIG', ''), 'modbus2mqtt.yml'))
+    try:
+        CONFIG = MySettings.load(os.path.join(os.environ.get('PYEVA_CONFIG', ''), 'modbus2mqtt.yml'))
+    except Exception as e:
+        logging.error(f'Failed to load config: {e}')
+        return
     if hassio_config() is not None:
         logging.info('Home assistant detected')
         f = "/homeassistant/addons/eva_ics/modbus2mqtt/templates"
