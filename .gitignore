@@ -1,3 +1,4 @@
 /eva_ics/hassio/config/modbus2mqtt.yml
 /main.py
 /docker-compose.yml
+/venv/
