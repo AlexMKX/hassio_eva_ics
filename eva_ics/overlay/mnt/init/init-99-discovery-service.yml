@@ -1,0 +1,33 @@
+version: 4
+content:
+  - node: .local
+    items:
+      - oid: lmacro:eva.macro.discovery/discovery
+        action:
+          svc: eva.controller.py
+
+        enabled: true
+
+    svcs:
+      - id: eva.controller.py
+        params:
+          command: venv/bin/eva4-svc-controller-py
+          bus:
+            path: var/bus.ipc
+          user: nobody
+
+      - id: eva.controller.discovery
+        params:
+          bus:
+            path: var/bus.ipc
+
+          command: svc/eva-controller-lm
+          config:
+            cycles:
+              - id: cycle
+                auto_start: true
+                interval: 10
+                run: lmacro:eva.macro.discovery/discovery
+                kwargs:
+                  config_dir: '/mnt/init/discovery/'
+          user: nobody

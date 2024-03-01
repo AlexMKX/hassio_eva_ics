@@ -2,3 +2,5 @@
 /main.py
 /docker-compose.yml
 /venv/
+/dev/
+/doc/build/

@@ -1,0 +1,72 @@
+# EVA ICS Modbus device configuration
+# pull single register because device does not support multiple registers read
+- count: 1
+  # register address - Holding with id 1
+  reg: h1
+  # slave ID
+  unit: {{item.slave}}
+  # register map to Eva entities
+  map:
+  # offset in result. Since we're pulling single register, it's always 0
+  - offset: 0
+    # EVA ICS entity ID - it should be manually mapped with outputs later
+    oid: sensor:{{item.eva_id}}/status
+    # data type
+    type: uint16
+- count: 1
+  reg: h3
+  unit: {{item.slave}}
+  map:
+  - offset: 0
+    # This will be an unit because we need two-way comm to set duty percentage. And generally it is not a sensor.
+    oid: unit:{{item.eva_id}}/duty_perc
+    type: uint16
+- count: 1
+  reg: h5
+  unit: {{item.slave}}
+  map:
+  - offset: 0
+    oid: unit:{{item.eva_id}}/gov
+    type: uint16
+- count: 1
+  reg: h6
+  unit: {{item.slave}}
+  map:
+  - offset: 0
+    oid: sensor:{{item.eva_id}}/cnt
+    type: uint16
+- count: 1
+  reg: h7
+  unit: {{item.slave}}
+  map:
+  - offset: 0
+    oid: sensor:{{item.eva_id}}/fan1_rpm
+    type: uint16
+- count: 1
+  reg: h8
+  unit: {{item.slave}}
+  map:
+  - offset: 0
+    oid: sensor:{{item.eva_id}}/fan2_rpm
+    type: uint16
+- count: 1
+  reg: h9
+  unit: {{item.slave}}
+  map:
+  - offset: 0
+    oid: sensor:{{item.eva_id}}/fan3_rpm
+    type: uint16
+- count: 1
+  reg: h10
+  unit: {{item.slave}}
+  map:
+  - offset: 0
+    oid: sensor:{{item.eva_id}}/fan4_rpm
+    type: uint16
+- count: 1
+  reg: h11
+  unit: {{item.slave}}
+  map:
+  - offset: 0
+    oid: unit:{{item.eva_id}}/pwm_freq
+    type: uint16

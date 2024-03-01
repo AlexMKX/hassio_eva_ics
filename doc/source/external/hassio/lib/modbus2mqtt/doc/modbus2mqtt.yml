@@ -1,0 +1,59 @@
+# Use to put generated configuration files to the specific place.
+# By default it goes to /mnt/init
+
+eva_deploy_dir: /mnt/init
+mqtt:
+# MQTT server config. By default, the hassio server config is
+# auto-generated if running as a HomeAssistant addon
+  hassio1:
+    # The base topic for the MQTT entities
+    base_topic: lab/test
+    # Discovery topic
+    discovery_topic: discovery
+    # EvaICS specific settings. Refer to
+    # https://info.bma.ai/en/actual/eva4/svc/eva-controller-pubsub.html?highlight=mqtt#setup
+    eva:
+      input_cache_sec: 3600
+      pubsub:
+        proto: mqtt
+        ca_certs: null
+        host:
+          - homeassistant.local:1883
+        cluster_hosts_randomize: false
+        username: evaics
+        password: 3223098409i
+        ping_interval: 10
+        queue_size: 1024
+        qos: 1
+# modbus entities configuration
+modbus:
+  # The modbus host
+  controller1:
+    # The MQTT server all slaves are published to. By default the hassio.
+    mqtt: hassio1
+    # EvaICS specific settings. Refer to
+    # https://info.bma.ai/en/actual/eva4/svc/eva-controller-modbus.html?highlight=modbus#setup
+    eva:
+      modbus:
+        protocol: tcp
+        path: mast-rack-modbus.lab.local:8899
+        unit: 1
+        # in case you experience constant timeouts when setting values
+        fc16_supported: false
+      retries: 5
+      pull_interval: 5
+    # Devices configuration
+    devices:
+      # Device name
+      mast-rack-rd:
+        # Device kind (e.g. plugin name)
+        kind: xy_md02
+        # Device slave address
+        slave: 5
+      mast-rack-fan3:
+        kind: juf_4802
+        slave: 2
+        # Some additional configuration for device as specified in plugin documentation
+        default_speed: 22
+        # do not publish discovery for this device
+        allow_discovery: false
