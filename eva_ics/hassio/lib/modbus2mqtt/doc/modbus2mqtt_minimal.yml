@@ -1,0 +1,16 @@
+modbus:
+  controller1:
+    eva:
+      modbus:
+        protocol: tcp
+        path: mast-rack-modbus.lab.local:8899
+        fc16_supported: false
+      retries: 5
+      pull_interval: 30
+    devices:
+      mast-rack-ru3:
+        kind: xy_md02
+        slave: 6
+      mast-rack-fan3:
+        kind: juf_4802
+        slave: 2

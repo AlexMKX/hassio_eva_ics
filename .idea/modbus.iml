@@ -4,9 +4,11 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/eva_ics/hassio/lib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/eva_ics/hassio/lib/modbus2mqtt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/eva_ics/hassio/modbus2mqtt/devices" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/eva_ics/hassio/lib/modbus2mqtt/doc/examples" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (modbus)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
