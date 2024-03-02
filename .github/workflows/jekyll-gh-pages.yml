@@ -33,9 +33,13 @@ jobs:
       - name: Build with Sphinx
         run: TZ=UTC make html
         working-directory: ./doc
-
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "doc/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: ./doc/build/html
