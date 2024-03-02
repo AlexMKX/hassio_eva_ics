@@ -20,17 +20,18 @@ os.makedirs(addon_docs, exist_ok=True)
 shutil.rmtree(addon_docs)
 os.makedirs(addon_docs, exist_ok=True)
 indexes = []
-for directory, subdirectories, files in os.walk(sources_root):
-    if os.path.basename(directory) == "doc":
-        target = os.path.join(addon_docs, directory[len(sources_root) + 1:])
-        os.makedirs(target, exist_ok=True)
-        shutil.copytree(directory, target, dirs_exist_ok=True)
-        indexes.append(os.path.join('external', directory[len(sources_root) + 1:], 'index.rst'))
-
-env = jinja2.Environment(loader=jinja2.FileSystemLoader(sphinx_root))
-template = env.get_template('indices.rst.j2')
-with open(os.path.join(sphinx_root, 'indices.rst'), 'w') as f:
-    f.write(template.render(indices=indexes))
+shutil.copytree(sources_root+"/hassio", addon_docs+"/hassio", dirs_exist_ok=True)
+# for directory, subdirectories, files in os.walk(sources_root):
+#     if os.path.basename(directory) == "doc":
+#         target = os.path.join(addon_docs, directory[len(sources_root) + 1:])
+#         os.makedirs(target, exist_ok=True)
+#         shutil.copytree(directory, target, dirs_exist_ok=True)
+#         indexes.append(os.path.join('external', directory[len(sources_root) + 1:], 'index.rst'))
+#
+# env = jinja2.Environment(loader=jinja2.FileSystemLoader(sphinx_root))
+# template = env.get_template('indices.rst.j2')
+# with open(os.path.join(sphinx_root, 'indices.rst'), 'w') as f:
+#     f.write(template.render(indices=indexes))
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
@@ -42,7 +43,7 @@ extensions = [
     'sphinx_autodoc_typehints',
     'sphinxcontrib.autodoc_pydantic',
     'sphinx.ext.autosummary',
-    'sphinx_markdown_builder',
+    "sphinx_immaterial"
 ]
 
 templates_path = ['_templates']
@@ -51,10 +52,12 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+html_theme = 'sphinx_immaterial'
+#html_static_path = ['source/_static']
 import sys, os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../eva_ics/hassio/lib'))
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../eva_ics/hassio/modbus2mqtt'))
-autosummary_generate = True
+sys.path.append(os.path.join(os.path.dirname(__file__), 'external/hassio/modbus2mqtt'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'external/hassio/lib'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'external/hassio/lib/modbus2mqtt'))
+
+#autosummary_generate = True

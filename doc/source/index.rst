@@ -11,6 +11,7 @@ Welcome to eva_ics's documentation!
    :caption: Contents:
 
    indices
+   external/hassio/lib/modbus2mqtt/doc/index
 
 Indices and tables
 ==================

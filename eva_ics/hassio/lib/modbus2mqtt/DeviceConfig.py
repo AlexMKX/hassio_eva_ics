@@ -3,7 +3,11 @@ from TrackedSettings import TrackedSettings
 from typing import List, Any, Dict
 from MqttConfig import MqttConfig
 from pydantic import Field
-import config
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import config
+
 
 
 class DeviceConfig(TrackedSettings):
@@ -96,6 +100,7 @@ class DeviceConfig(TrackedSettings):
 
         :return: MqttConfig
         """
+        import config
         if self.parent.mqtt not in config.CONFIG.mqtt.keys():
             raise RuntimeError(f"No {self.parent.mqtt} broker")
         return config.CONFIG.mqtt[self.parent.mqtt]

@@ -4,8 +4,8 @@ from TrackedSettings import TrackedSettings
 from typing import List, Any, Dict, Optional
 from pydantic import Field
 from DeviceConfig import DeviceConfig
+from typing import TYPE_CHECKING
 
-import config
 import os
 
 
@@ -42,6 +42,7 @@ class ModbusConfig(TrackedSettings):
         :param __context:
         :return: None
         """
+        import config
         import DeviceConfig as ModDeviceConfig
         import os, sys
         sys.path.append(os.path.dirname(os.path.dirname(ModDeviceConfig.__file__)))

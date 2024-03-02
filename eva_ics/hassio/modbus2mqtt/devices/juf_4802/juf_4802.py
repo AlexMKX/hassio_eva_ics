@@ -1,10 +1,10 @@
-from DeviceConfig import DeviceConfig
+import DeviceConfig
 from typing import List, Any, Dict
 import jinja2
 import yaml
 
 
-class Device(DeviceConfig):
+class Device(DeviceConfig.DeviceConfig):
     default_speed: int = 25
 
     @property
