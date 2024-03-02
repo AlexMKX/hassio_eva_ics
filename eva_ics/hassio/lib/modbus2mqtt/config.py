@@ -15,7 +15,8 @@ from ModbusConfig import ModbusConfig
 class AppConfig(TrackedSettings):
     mqtt: Optional[Dict[str, MqttConfig]] = Field(default={})
     modbus: Dict[str, ModbusConfig]
-    eva_deploy_dir: str = Field(default='/mnt/init')
+    eva_deploy_dir: Optional[str] = Field(default='/mnt/init')
+    discovery_topic: Optional[str] = Field(default="homeassistant")
 
     @field_validator('mqtt')
     def mqtt_validator(cls, v, values):
@@ -74,7 +75,23 @@ class AppConfig(TrackedSettings):
         :param filename:
         :return:
         """
-        config = yaml.load(open(filename, 'r'), Loader=yaml.FullLoader)
+        try:
+            config = yaml.load(open(filename, 'r'), Loader=yaml.FullLoader)
+        except FileNotFoundError as e:
+            import os, shutil
+            logging.warning(f'Failed to load config: {e}, creating sample one')
+            directory = os.path.dirname(__file__)
+
+            # Source file path (relative to __file__)
+            source_file = os.path.join(directory, 'doc/modbus2mqtt_minimal.yml')
+
+            # Resolve the relative file path
+            source_file = os.path.normpath(source_file)
+            target_fld = os.path.dirname(filename)
+            os.makedirs(target_fld, exist_ok=True)
+            # Copy the file from source to destination
+            shutil.copy(source_file, filename)
+
         return cls(**config)
 
 
