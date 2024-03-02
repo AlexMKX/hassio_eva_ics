@@ -34,11 +34,11 @@ jobs:
         run: TZ=UTC make html
         working-directory: ./doc
 
-#      - name: Upload artifact
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: documentation
-#          path: ./docs/_build/html
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation
+          path: ./docs/_build/html
 
   deploy:
     environment:
