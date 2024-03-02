@@ -20,16 +20,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
       - name: Install prerequisites
         run: pip install -r requirements.txt
         working-directory: ./doc/source
-#      - name: Setup Pages
-#        uses: actions/configure-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
       - name: Build with Sphinx
         run: TZ=UTC make html
         working-directory: ./doc
