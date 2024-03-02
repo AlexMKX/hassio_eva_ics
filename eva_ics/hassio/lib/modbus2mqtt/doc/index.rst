@@ -1,11 +1,10 @@
-EvaICS Modbus2MQTT
+Modbus2MQTT Bridge
 ==================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    :caption: Contents:
 
-   examples
+   configuration
    classes
-
-* :ref:`genindex`
+   ../../../modbus2mqtt/devices/index

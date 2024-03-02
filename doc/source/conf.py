@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'eva_ics'
+project = 'EvaICS addon for HomeAssistant'
 copyright = '2024, Alexander K'
 author = 'Alexander K'
 
@@ -21,20 +21,6 @@ shutil.rmtree(addon_docs)
 os.makedirs(addon_docs, exist_ok=True)
 indexes = []
 shutil.copytree(sources_root+"/hassio", addon_docs+"/hassio", dirs_exist_ok=True)
-# for directory, subdirectories, files in os.walk(sources_root):
-#     if os.path.basename(directory) == "doc":
-#         target = os.path.join(addon_docs, directory[len(sources_root) + 1:])
-#         os.makedirs(target, exist_ok=True)
-#         shutil.copytree(directory, target, dirs_exist_ok=True)
-#         indexes.append(os.path.join('external', directory[len(sources_root) + 1:], 'index.rst'))
-#
-# env = jinja2.Environment(loader=jinja2.FileSystemLoader(sphinx_root))
-# template = env.get_template('indices.rst.j2')
-# with open(os.path.join(sphinx_root, 'indices.rst'), 'w') as f:
-#     f.write(template.render(indices=indexes))
-# -- General configuration ---------------------------------------------------
-# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-
 extensions = [
     'sphinx.ext.duration',
     'sphinx.ext.doctest',
@@ -43,7 +29,8 @@ extensions = [
     'sphinx_autodoc_typehints',
     'sphinxcontrib.autodoc_pydantic',
     'sphinx.ext.autosummary',
-    "sphinx_immaterial"
+    "sphinx_immaterial",
+    'sphinx.ext.autosectionlabel'
 ]
 
 templates_path = ['_templates']
@@ -53,11 +40,10 @@ exclude_patterns = []
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'sphinx_immaterial'
-#html_static_path = ['source/_static']
+
 import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'external/hassio/modbus2mqtt'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'external/hassio/lib'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'external/hassio/lib/modbus2mqtt'))
 
-#autosummary_generate = True
