@@ -54,7 +54,7 @@ class Device(DeviceConfig.DeviceConfig):
                                             "percentage_value_template":
                                                 "{{ value_json.value | is_defined }}",
                                             "state_topic": f"{self.mqtt.base_topic}/{self.eva_id}/duty_perc",
-
+                                            "availability_topic": f"{self.mqtt.base_topic}/{self.eva_id}/duty_perc",
                                             "name": f"{self.eva_id} Fan",
                                             },
                                    slug="fan")

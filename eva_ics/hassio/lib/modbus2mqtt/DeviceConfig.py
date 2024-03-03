@@ -9,7 +9,6 @@ if TYPE_CHECKING:
     import config
 
 
-
 class DeviceConfig(TrackedSettings):
     """
     The base class for the device configuration. All devices must be derived from this class.
@@ -76,18 +75,25 @@ class DeviceConfig(TrackedSettings):
                     "manufacturer": self.manufacturer,
                     "model": self.model,
                     "name": f"{self.eva_id}",
-                    "via_device": "eva_modbus2mqtt"
-                }
+                    "via_device": "eva_modbus2mqtt",
+
+                },
+                "payload_available": "1",
+                "payload_not_available": "-1",
+                "availability_template": "{{ value_json.status }}",
+
             }}
         if slug is not None:
             rv['payload']['object_id'] = f"{self.eva_id}_{slug}"
             rv['payload']['unique_id'] = f"{self.eva_id}_{slug}"
             rv["topic"] = f"{self.mqtt.get_discovery_topic()}/{item_type}/{self.eva_id}/{slug}/config"
             rv['payload']["state_topic"] = f"{self.mqtt.base_topic}/{self.eva_id}/{slug}"
+            rv['payload']["availability_topic"] = f"{self.mqtt.base_topic}/{self.eva_id}/{slug}"
             rv['payload']["json_attributes_topic"] = f"{self.mqtt.base_topic}/{self.eva_id}/{slug}"
         else:
             rv["topic"] = f"{self.mqtt.get_discovery_topic()}/{item_type}/{self.eva_id}/config"
             rv['payload']["state_topic"] = f"{self.mqtt.base_topic}/{self.eva_id}"
+            rv['payload']["availability_topic"] = f"{self.mqtt.base_topic}/{self.eva_id}"
             rv['payload']["json_attributes_topic"] = f"{self.mqtt.base_topic}/{self.eva_id}"
         if payload is not None:
             rv['payload'] = {**rv['payload'], **payload}
