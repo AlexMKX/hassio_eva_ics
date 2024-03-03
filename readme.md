@@ -1,3 +1,5 @@
-#EvaICS addon for Home Assistant
+# EvaICS addon for Home Assistant
 
-Visit https://alexmkx.github.io/hassio_eva_ics/ for the documentation
+[Eva](https://www.bohemia-automation.com/software/eva4/) ❤️ HomeAssistant
+
+Please visit https://alexmkx.github.io/hassio_eva_ics/ for the documentation
