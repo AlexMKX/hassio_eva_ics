@@ -2,13 +2,14 @@ ARG BUILD_FROM=altertech/eva-ics4:latest
 FROM $BUILD_FROM
 
 
-RUN curl https://x.bma.ai/d/i6BO0xuWxOJG5b4s/RsJsASzRwaaTEzMp/eva-controller-modbus -o /opt/eva4/svc/eva-controller-modbus
-RUN chmod a+x /opt/eva4/svc/eva-controller-modbus
+#RUN curl https://x.bma.ai/d/i6BO0xuWxOJG5b4s/RsJsASzRwaaTEzMp/eva-controller-modbus -o /opt/eva4/svc/eva-controller-modbus
+#RUN chmod a+x /opt/eva4/svc/eva-controller-modbus
 
 
 #RUN apt -y install python3 python3-pip
+RUN apt update --fix-missing
 RUN  apt install -y software-properties-common python3-pip && \
-     add-apt-repository -y ppa:deadsnakes/ppa && apt update && \
+     add-apt-repository -y ppa:deadsnakes/ppa && apt update --fix-missing && \
      apt -y install python3.11-distutils python3.11 python3.11-venv && \
      curl https://bootstrap.pypa.io/get-pip.py | python3.11 -
 

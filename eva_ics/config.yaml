@@ -1,6 +1,6 @@
 name: "EVA-ICS"
 description: "Eva ICS addon for Home Assistant"
-version: "1.0.96"
+version: "1.0.97"
 slug: "eva_ics"
 init: false
 url: https://github.com/AlexMKX/hassio_eva_ics/tree/master/eva_ics
