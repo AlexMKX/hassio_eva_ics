@@ -20,7 +20,7 @@ class Device(DeviceConfig):
         """
         return [
             {
-                "reg": "i4",
+                "reg": "h4",
                 "unit": self.slave,
                 "count": 1,
                 "map": [
