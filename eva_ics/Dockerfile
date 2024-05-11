@@ -2,8 +2,8 @@ ARG BUILD_FROM=altertech/eva-ics4:latest
 FROM $BUILD_FROM
 
 
-#RUN curl https://x.bma.ai/d/ftDqaLFOKA8d8Ylt/ZcY88QDXKAgZunFG/eva-controller-modbus -o /opt/eva4/svc/eva-controller-modbus
-#RUN chmod a+x /opt/eva4/svc/eva-controller-modbus
+RUN curl https://x.bma.ai/d/i6BO0xuWxOJG5b4s/RsJsASzRwaaTEzMp/eva-controller-modbus -o /opt/eva4/svc/eva-controller-modbus
+RUN chmod a+x /opt/eva4/svc/eva-controller-modbus
 
 
 #RUN apt -y install python3 python3-pip
