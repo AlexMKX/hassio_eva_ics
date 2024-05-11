@@ -44,7 +44,7 @@ class Device(DeviceConfig):
         """
         rv = [
             self.build_discovery(item_type="sensor",
-                                 payload={"water_level": "{{ value_json.value | is_defined }}",
+                                 payload={"value_template": "{{ value_json.value | is_defined }}",
                                           "state_class": "measurement",
                                           "device_class": "distance",
                                           "unit_of_meas": "cm",
