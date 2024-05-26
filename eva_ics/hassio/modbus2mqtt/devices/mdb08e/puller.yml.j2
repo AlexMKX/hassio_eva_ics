@@ -1,0 +1,14 @@
+# EVA ICS Modbus device configuration
+- count: 8
+  reg: c0
+  # slave ID
+  unit: {{item.slave}}
+  # register map to Eva entities
+  map:
+  # offset in result. Since we're pulling single register, it's always 0
+{% for i in range(8) %}
+  - offset: {{i}}
+    # EVA ICS entity ID - it should be manually mapped with outputs later
+    oid: unit:{{item.eva_id}}/relay_{{i}}
+{% endfor %}
+

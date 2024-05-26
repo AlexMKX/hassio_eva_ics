@@ -3,4 +3,5 @@ jinja2
 pyaml
 pydantic
 requests
+pydevd-pycharm
 #pip install git+https://github.com/bashtage/sphinx-material.git
