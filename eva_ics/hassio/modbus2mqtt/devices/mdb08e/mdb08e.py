@@ -1,10 +1,20 @@
+import logging
+
 import DeviceConfig
 from typing import List, Any, Dict
 import jinja2
 import yaml
+import pydevd_pycharm
 
 
 class Device(DeviceConfig.DeviceConfig):
+
+    def initialize(self):
+        """
+        Initializes the discovery - set manufacturer and model.
+        """
+        self.manufacturer = "Aliexpress"
+        self.model = "mdb08e"
 
     @property
     def puller_config(self) -> List[Dict[str, Any]]:
@@ -27,11 +37,13 @@ class Device(DeviceConfig.DeviceConfig):
         <https://info.bma.ai/en/actual/eva4/svc/eva-controller-pubsub.html?highlight=mqtt#input>`_
         :return:
         """
+        # pydevd_pycharm.settrace('192.168.88.155', port=5558, stdoutToServer=True, stderrToServer=True)
         rv = {}
         for i in range(8):
-            rv[f"unit:{self.eva_id}/relay{i}"] = {
+            rv[f"unit:{self.eva_id}/relay_{i}"] = {
                 "topic": f"{self.mqtt.base_topic}/{self.eva_id}/relay_{i}/set",
-                "reg": f"c{i}"
+                "reg": f"c{i}",
+                "type": "bit"
             }
         return rv
 
@@ -75,19 +87,17 @@ class Device(DeviceConfig.DeviceConfig):
             "value_template": "{{ value_json.state_l1 }}",
             "platform": "mqtt"
         }
-        for i in range(0):
+        for i in range(8):
             disc = self.build_discovery(item_type="switch",
                                         payload={"device_class": "switch",
                                                  "command_topic": f"{self.mqtt.base_topic}/{self.eva_id}/relay_{i}/set",
-                                                 "state_value_template":
-                                                     "{{ 'ON' if value_json.value>0 else 'OFF' }}",
-                                                 "command_template":
-                                                     f"{{{{ 0 if value=='OFF' else "
-                                                     f"128 if value=='ON' else value }}}}",
-#                                                 "state_topic": f"{self.mqtt.base_topic}/{self.eva_id}/duty_perc",
-#                                                 "availability_topic": f"{self.mqtt.base_topic}/{self.eva_id}/duty_perc",
-                                                 "name": f"{self.eva_id} Fan",
+                                                 "payload_off": 0,
+                                                 "payload_on": 1,
+                                                 "value_template": "{{ value_json.value }}",
+                                                 "state_topic": f"{self.mqtt.base_topic}/{self.eva_id}/relay_{i}",
+                                                 "name": f"{self.eva_id} {i}",
                                                  },
                                         slug=f"relay_{i}")
             rv.append(disc)
+        #pydevd_pycharm.settrace('192.168.88.155', port=5558, stdoutToServer=True, stderrToServer=True)
         return rv

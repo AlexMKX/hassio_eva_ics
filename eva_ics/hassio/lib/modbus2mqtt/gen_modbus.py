@@ -63,8 +63,12 @@ def module_main():
         deploy_mqtt['content'][0]['svcs'].append(v.get_svc_config())
 
     with open(os.path.join(config.CONFIG.eva_deploy_dir, 'init-0-modbus-0.yml'), 'w') as f:
-        #logging.info(yaml.dump(deploy_modbus))
         f.write(yaml.dump(deploy_modbus))
     with open(os.path.join(config.CONFIG.eva_deploy_dir, 'init-1-mqtt-0.yml'), 'w') as f:
-        #logging.info(yaml.dump(deploy_mqtt))
         f.write(yaml.dump(deploy_mqtt))
+    if config.CONFIG.config_dump_path is not None:
+        os.makedirs(os.path.dirname(config.CONFIG.config_dump_path), exist_ok=True)
+        with open(os.path.join(config.CONFIG.config_dump_path, 'init-0-modbus-0.yml'), 'w') as f:
+            f.write(yaml.dump(deploy_modbus))
+        with open(os.path.join(config.CONFIG.config_dump_path, 'init-1-mqtt-0.yml'), 'w') as f:
+            f.write(yaml.dump(deploy_mqtt))

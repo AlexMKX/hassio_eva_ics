@@ -17,7 +17,7 @@ class AppConfig(TrackedSettings):
     modbus: Dict[str, ModbusConfig]
     eva_deploy_dir: Optional[str] = Field(default='/mnt/init')
     discovery_topic: Optional[str] = Field(default="homeassistant")
-
+    config_dump_path: Optional[str] = Field(default=None, description="Path to dump config")
     @field_validator('mqtt')
     def mqtt_validator(cls, v, values):
         """
