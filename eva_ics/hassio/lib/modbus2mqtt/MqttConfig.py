@@ -79,11 +79,11 @@ class MqttConfig(TrackedSettings):
         if self.eva is None:
             rv['params']['config'] = self.get_hassio_config()
         rv['params']['config']['output'] = []
+        rv['params']['config']['input'] = []
         for mk, mv in self.parent.modbus.items():
             for dk, dv in mv.devices.items():
                 if dv.mqtt.id == self.id:
                     rv['params']['config']['output'].extend(dv.output_config)
-                    rv['params']['config']['input'] = []
                     for k, v in dv.input_config.items():
                         ic = {
                             "topic": v['topic'],
