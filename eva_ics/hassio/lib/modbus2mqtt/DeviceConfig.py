@@ -152,7 +152,7 @@ class DeviceConfig(TrackedSettings):
             ],
                 "packer": "json",
                 "topic": f"{self.mqtt.base_topic}/{self.eva_id}/{r}",
-                #"interval": 60
+                "interval": 5
             }
             mapping.append(m)
 
